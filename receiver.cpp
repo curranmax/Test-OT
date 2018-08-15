@@ -1,10 +1,14 @@
 
+#include <cryptoTools/Common/Defines.h>
+
 #include <cryptoTools/Network/Channel.h>
 #include <cryptoTools/Network/IOService.h>
 
 #include "libOTe/Base/BaseOT.h"
 
 #include <array>
+
+using namespace osuCrypto;
 
 #define K 4
 
@@ -13,13 +17,13 @@ int main(int argc, char const *argv[]) {
 	int desired_index = 0;
 
 	// Goal is to get the value of sender.table[desired_index] into fetch_entry
-	std::array<int, K> fetched_entry;
+	std::vector<int> fetched_entry; // Can assume the size will be K
 
 	// ------------------------------------
 	// | Initialize communication objects |
 	// ------------------------------------
 	// Initializes random number generator.
-	RNG prng(_mm_set_epi32(1, 2, 3, 4));
+	PRNG prng(_mm_set_epi32(1, 2, 3, 4));
 
 	// Initializes IOService
 	int num_io_threads = 4;
@@ -35,6 +39,8 @@ int main(int argc, char const *argv[]) {
 
 	// Creates the channel used to send data between the two.
 	Channel ch = ep.addChannel(channel_name);
+
+	ch.waitForConnection();
 
 	return 0;
 }
