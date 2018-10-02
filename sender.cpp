@@ -12,6 +12,7 @@
 using namespace osuCrypto;
 
 // Constants related to table
+// Ideally N would be ~1,000,000, and K would be 150
 #define N 10
 #define K 4
 
@@ -46,6 +47,8 @@ int main(int argc, char const *argv[]) {
 	Channel ch = ep.addChannel(channel_name);
 
 	ch.waitForConnection();
+
+	// OT
 
 	return 0;
 }
