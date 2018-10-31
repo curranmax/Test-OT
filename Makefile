@@ -17,18 +17,15 @@ SOURCES = main.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 NAME = ot
 
-all: sender receiver
+all: main
 
-sender: sender.o
-	$(CC) $(CFLAGS) sender.o $(LIB_PATH) -o sender
-
-receiver: receiver.o
-	$(CC) $(CFLAGS) receiver.o $(LIB_PATH) -o receiver
+main: main.o
+	$(CC) $(CFLAGS) main.o $(LIB_PATH) -o main
 
 .cpp.o:
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f sender receiver *.o
+	rm -f main *.o
 
 
